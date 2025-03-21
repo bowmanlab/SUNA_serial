@@ -22,11 +22,11 @@ import sys
 if len(sys.argv) == 1:
     com = 'COM7'
 else:
-    com = sys.arv[1]
+    com = sys.argv[1]
 
 #### working block
 
-ser = serial.Serial(port='COM7', baudrate=57600, xonxoff=True, timeout = 10)
+ser = serial.Serial(port=com, baudrate=57600, xonxoff=True, timeout = 10)
 
 ser.write('status'.encode('utf-8'))
 time.sleep(1)
