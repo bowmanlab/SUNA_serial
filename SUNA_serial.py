@@ -24,9 +24,9 @@ if len(sys.argv) == 1:
 else:
     com = sys.argv[1]
 
-#### working block
-
 ser = serial.Serial(port=com, baudrate=57600, xonxoff=True, timeout = 10)
+
+## ping it with a status command to wake up, then request data
 
 ser.write('status'.encode('utf-8'))
 time.sleep(1)
@@ -38,7 +38,7 @@ ser.close()
 
 data = list(map(str, data))
 
-## where does data start?
+## find where in the ouput the data start
 
 for i,j in enumerate(data):
     if 'SATSDF1921' in j:
@@ -62,7 +62,6 @@ with open(dir_out + now + '_SUNA.txt', 'w') as data_out:
         item = item.strip('\r\n')
         item = item.replace('5SATSDF', 'SATSDF')
         item = item + '\n'
-        #item = item.split(',')
         clean_data.append(item)
         data_out.writelines(item)
     
